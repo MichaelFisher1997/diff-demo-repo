@@ -20,11 +20,19 @@ async function takeScreenshots() {
   options.addArguments('--disable-dev-shm-usage');
   options.addArguments('--disable-gpu');
 
+  // Use environment variables for flexible configuration
+  const seleniumHost = process.env.SELENIUM_HOST || 'localhost';
+  const seleniumPort = process.env.SELENIUM_PORT || '4444';
+  const baseUrl = process.env.BASE_URL || 'http://localhost:4324';
+
+  console.log(`Using Selenium at: ${seleniumHost}:${seleniumPort}`);
+  console.log(`Using base URL: ${baseUrl}`);
+
   // Connect to the Selenium Grid in Docker
   const driver = await new Builder()
     .forBrowser('chrome')
     .setChromeOptions(options)
-    .usingServer('http://localhost:4444/wd/hub')
+    .usingServer(`http://${seleniumHost}:${seleniumPort}/wd/hub`)
     .build();
 
   console.log('Taking screenshots...');
@@ -32,7 +40,7 @@ async function takeScreenshots() {
   try {
     // Home page
     console.log(' - Home page');
-    await driver.get('http://localhost:4324/');
+    await driver.get(`${baseUrl}/`);
     await driver.wait(until.elementLocated(By.tagName('body')), 5000);
     const homeData = await driver.takeScreenshot();
     fs.writeFileSync('screenshots/home.png', homeData, 'base64');
@@ -40,7 +48,7 @@ async function takeScreenshots() {
 
     // Pricing page
     console.log(' - Pricing page');
-    await driver.get('http://localhost:4324/pricing.html');
+    await driver.get(`${baseUrl}/pricing.html`);
     await driver.wait(until.elementLocated(By.tagName('body')), 5000);
     const pricingData = await driver.takeScreenshot();
     fs.writeFileSync('screenshots/pricing.png', pricingData, 'base64');
@@ -48,7 +56,7 @@ async function takeScreenshots() {
 
     // Playground page
     console.log(' - Playground page');
-    await driver.get('http://localhost:4324/playground.html');
+    await driver.get(`${baseUrl}/playground.html`);
     await driver.wait(until.elementLocated(By.tagName('body')), 5000);
     const playgroundData = await driver.takeScreenshot();
     fs.writeFileSync('screenshots/playground.png', playgroundData, 'base64');

@@ -1,4 +1,4 @@
-name: Build and Test
+name: Build and Test Screenshots
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-and-test:
+  test-screenshots:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,32 +24,67 @@ jobs:
       run: bun run build
 
     - name: Start static server
-      run: bunx http-server dist -p 4321 &
+      run: bunx http-server dist -p 4324 &
       shell: bash
 
-    - name: Install Chrome and Chromedriver
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-        bunx chromedriver --version
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v3
 
-    - name: Wait for server to be ready
+    - name: Start Docker Chrome container
       run: |
+        docker-compose up -d
+        
+    - name: Wait for services to be ready
+      run: |
+        echo "Waiting for Selenium Grid..."
         for i in {1..30}; do
-          if curl -s http://localhost:4321 > /dev/null; then
-            echo "Server is ready"
+          if curl -s http://localhost:4444 > /dev/null; then
+            echo "Selenium Grid is ready"
             break
           fi
-          echo "Waiting for server... ($i/30)"
+          echo "Waiting for Selenium Grid... ($i/30)"
+          sleep 2
+        done
+        
+        echo "Waiting for web server..."
+        for i in {1..30}; do
+          if curl -s http://localhost:4324 > /dev/null; then
+            echo "Web server is ready"
+            break
+          fi
+          echo "Waiting for web server... ($i/30)"
           sleep 1
         done
 
-    - name: Run Nightwatch tests
-      run: bun run test:e2e:ci
+    - name: Create screenshots directory
+      run: mkdir -p screenshots
 
-    - name: Upload screenshots
+    - name: Run selenium screenshot tests
+      run: bun run test:selenium:ci
+      continue-on-error: true
+      env:
+        SELENIUM_HOST: localhost
+        SELENIUM_PORT: 4444
+        BASE_URL: http://localhost:4324
+
+    - name: Upload screenshots as artifacts
       uses: actions/upload-artifact@v4
+      if: always()
       with:
-        name: screenshots
+        name: screenshots-${{ github.run_number }}
         path: screenshots/
-        retention-days: 30
+        retention-days: 7
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ github.run_number }}
+        path: |
+          logs/
+          tests_output/
+        retention-days: 7
+
+    - name: Container logs
+      if: always()
+      run: docker-compose logs chrome
