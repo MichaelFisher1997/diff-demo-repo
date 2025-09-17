@@ -1,0 +1,67 @@
+---
+import Layout from '../components/Layout.jsx';
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Minimal Site</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="min-h-screen bg-gray-50">
+    <Layout title="Home - Minimal Site">
+  <section class="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Welcome to Minimal Site</h1>
+      <p class="text-xl md:text-2xl mb-8 text-blue-100">A clean, fast, and beautiful website built with Astro and Tailwind CSS</p>
+      <a href="/pricing" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors inline-block">
+        Get Started
+      </a>
+    </div>
+  </section>
+
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Features</h2>
+        <p class="text-xl text-gray-600">Everything you need in a minimal package</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-sm border">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Lightning Fast</h3>
+          <p class="text-gray-600">Built with Astro for optimal performance and speed</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-sm border">
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Fully Customizable</h3>
+          <p class="text-gray-600">Tailwind CSS gives you complete control over styling</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-sm border">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Modern Design</h3>
+          <p class="text-gray-600">Clean, responsive design that works on all devices</p>
+        </div>
+      </div>
+    </div>
+  </section>
+    </Layout>
+</body>
+</html>

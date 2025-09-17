@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+*.log
+
+# Build outputs
+dist/
+.svelte-kit/
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Bower dependency directory
+bower_components
+
+# Temporary folders
+tmp/
+temp/
+
+# Screenshots (keep the folder but ignore the files)
+screenshots/*.png
+!screenshots/.gitkeep
+
+# Test outputs
+tests_output/
+logs/
+
+# Docker
+.dockerignore
+
+# Astro
+.astro/

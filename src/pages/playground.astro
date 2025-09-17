@@ -1,0 +1,168 @@
+---
+import Layout from '../components/Layout.jsx';
+import '../styles/global.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground - Minimal Site</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="min-h-screen bg-gray-50">
+    <Layout title="Playground - Minimal Site">
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Interactive Playground</h1>
+        <p class="text-xl text-gray-600">Tweak the controls to see changes in real-time</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div class="space-y-6">
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Border Radius</h3>
+            <input type="range" id="borderRadius" min="0" max="50" value="8" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+            <div class="flex justify-between text-sm text-gray-600 mt-2">
+              <span>0px</span>
+              <span id="borderRadiusValue">8px</span>
+              <span>50px</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Shadow Size</h3>
+            <input type="range" id="shadowSize" min="0" max="40" value="16" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer" />
+            <div class="flex justify-between text-sm text-gray-600 mt-2">
+              <span>0px</span>
+              <span id="shadowSizeValue">16px</span>
+              <span>40px</span>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Primary Color</h3>
+            <div class="grid grid-cols-4 gap-3">
+              <button class="color-btn w-full h-12 rounded-lg bg-blue-600 hover:scale-105 transition-transform" data-color="#2563eb"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-green-600 hover:scale-105 transition-transform" data-color="#16a34a"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-purple-600 hover:scale-105 transition-transform" data-color="#9333ea"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-red-600 hover:scale-105 transition-transform" data-color="#dc2626"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-yellow-500 hover:scale-105 transition-transform" data-color="#eab308"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-pink-600 hover:scale-105 transition-transform" data-color="#db2777"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-indigo-600 hover:scale-105 transition-transform" data-color="#4f46e5"></button>
+              <button class="color-btn w-full h-12 rounded-lg bg-gray-800 hover:scale-105 transition-transform" data-color="#1f2937"></button>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-sm border">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Shape</h3>
+            <div class="flex gap-3">
+              <button id="shapeCard" class="flex-1 py-2 px-4 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                Card
+              </button>
+              <button id="shapeCircle" class="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                Circle
+              </button>
+              <button id="shapeSquare" class="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                Square
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center">
+          <div id="preview" class="w-80 h-80 bg-white flex items-center justify-center transition-all duration-300" style={{ borderRadius: '8px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)', backgroundColor: '#2563eb' }}>
+            <div class="text-white text-center">
+              <svg class="w-16 h-16 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+              </svg>
+              <p class="text-lg font-semibold">Preview Element</p>
+              <p class="text-sm opacity-90">Changes in real-time</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const preview = document.getElementById('preview');
+    const borderRadiusSlider = document.getElementById('borderRadius');
+    const borderRadiusValue = document.getElementById('borderRadiusValue');
+    const shadowSizeSlider = document.getElementById('shadowSize');
+    const shadowSizeValue = document.getElementById('shadowSizeValue');
+    const colorButtons = document.querySelectorAll('.color-btn');
+    const shapeButtons = {
+      card: document.getElementById('shapeCard'),
+      circle: document.getElementById('shapeCircle'),
+      square: document.getElementById('shapeSquare')
+    };
+
+    let currentShape = 'card';
+    let currentColor = '#2563eb';
+
+    function updatePreview() {
+      const borderRadius = borderRadiusSlider.value;
+      const shadowSize = shadowSizeSlider.value;
+      
+      borderRadiusValue.textContent = `${borderRadius}px`;
+      shadowSizeValue.textContent = `${shadowSize}px`;
+      
+      let finalBorderRadius = borderRadius;
+      
+      if (currentShape === 'circle') {
+        finalBorderRadius = '50%';
+      } else if (currentShape === 'square') {
+        finalBorderRadius = '0px';
+      }
+      
+      preview.style.borderRadius = finalBorderRadius;
+      preview.style.boxShadow = `0 ${Math.floor(shadowSize * 0.25)}px ${shadowSize}px rgba(0, 0, 0, 0.1)`;
+      preview.style.backgroundColor = currentColor;
+    }
+
+    function setActiveShapeButton(shape) {
+      Object.entries(shapeButtons).forEach(([key, button]) => {
+        if (key === shape) {
+          button.class = 'flex-1 py-2 px-4 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 transition-colors';
+        } else {
+          button.class = 'flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition-colors';
+        }
+      });
+    }
+
+    borderRadiusSlider.addEventListener('input', updatePreview);
+    shadowSizeSlider.addEventListener('input', updatePreview);
+
+    colorButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        currentColor = button.dataset.color;
+        updatePreview();
+      });
+    });
+
+    shapeButtons.card.addEventListener('click', () => {
+      currentShape = 'card';
+      setActiveShapeButton('card');
+      updatePreview();
+    });
+
+    shapeButtons.circle.addEventListener('click', () => {
+      currentShape = 'circle';
+      setActiveShapeButton('circle');
+      updatePreview();
+    });
+
+    shapeButtons.square.addEventListener('click', () => {
+      currentShape = 'square';
+      setActiveShapeButton('square');
+      updatePreview();
+    });
+
+    updatePreview();
+  </script>
+    </Layout>
+</body>
+</html>
