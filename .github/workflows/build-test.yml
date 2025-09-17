@@ -1,4 +1,4 @@
-name: Build and Test Screenshots
+name: 🚀 Screenshot Testing CI/CD
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [ main, master ]
 
 jobs:
-  test-screenshots:
+  screenshot-testing:
+    name: Automated Screenshot Testing
     runs-on: ubuntu-latest
 
     steps:
