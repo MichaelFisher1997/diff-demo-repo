@@ -32,7 +32,7 @@ jobs:
 
     - name: Start Docker Chrome container
       run: |
-        docker-compose up -d
+        docker compose up -d
         
     - name: Wait for services to be ready
       run: |
@@ -87,4 +87,4 @@ jobs:
 
     - name: Container logs
       if: always()
-      run: docker-compose logs chrome
+      run: docker compose logs chrome
