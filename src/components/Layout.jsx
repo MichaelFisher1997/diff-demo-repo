@@ -3,16 +3,16 @@ import React from 'react';
 export default function Layout({ title, children }) {
   return (
     <>
-      <nav class="bg-white shadow-sm border-b">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex justify-between h-16">
-            <div class="flex items-center">
-              <h1 class="text-xl font-bold text-gray-900">Minimal Site</h1>
+      <nav className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold text-gray-900">Modern Site</h1>
             </div>
-            <div class="flex items-center space-x-8">
-              <a href="/" class="text-gray-700 hover:text-gray-900 transition-colors">Home</a>
-              <a href="/pricing" class="text-gray-700 hover:text-gray-900 transition-colors">Pricing</a>
-              <a href="/playground" class="text-gray-700 hover:text-gray-900 transition-colors">Playground</a>
+            <div className="flex items-center space-x-8">
+              <a href="/" className="text-gray-700 hover:text-gray-900 transition-colors">Home</a>
+              <a href="/pricing" className="text-gray-700 hover:text-gray-900 transition-colors">Pricing</a>
+              <a href="/playground" className="text-gray-700 hover:text-gray-900 transition-colors">Playground</a>
             </div>
           </div>
         </div>

@@ -28,7 +28,7 @@ jobs:
       run: bun run build
 
     - name: Start static server
-      run: bunx http-server dist -p 4324 &
+      run: bunx http-server dist -p 4321 &
       shell: bash
 
     - name: Set up Docker
@@ -89,7 +89,7 @@ jobs:
       env:
         SELENIUM_HOST: localhost
         SELENIUM_PORT: 4444
-        BASE_URL: http://localhost:4324
+        BASE_URL: http://localhost:4321
       timeout-minutes: 2
 
     - name: Upload screenshots as artifacts

@@ -29,9 +29,9 @@
     "test:e2e": "nightwatch",
     "test:e2e:ci": "nightwatch --env chrome",
     "test:docker": "docker-compose run nightwatch",
-    "test:chrome": "SELENIUM_HOST=localhost SELENIUM_PORT=4444 BASE_URL=http://localhost:4324 nightwatch --env chrome tests/screenshots.js",
+    "test:chrome": "SELENIUM_HOST=localhost SELENIUM_PORT=4444 BASE_URL=http://localhost:4321 nightwatch --env chrome tests/screenshots.js",
     "test:selenium": "node selenium-screenshots.js",
-    "test:selenium:ci": "BASE_URL=http://localhost:4324 node selenium-screenshots.js"
+    "test:selenium:ci": "BASE_URL=http://localhost:4321 node selenium-screenshots.js"
   },
   "dependencies": {
     "astro": "^4.0.0",
