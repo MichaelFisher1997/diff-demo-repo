@@ -12,11 +12,14 @@ RUN bun install
 # Copy source code
 COPY . .
 
+# Build the application
+RUN bun run build
+
 # Create screenshots directory
 RUN mkdir -p screenshots
 
-# Expose port (if needed)
-EXPOSE 3000
+# Expose port
+EXPOSE 4321
 
-# Default command
-CMD ["bun", "run", "test:e2e"]
+# Default command - serve the built application
+CMD ["bunx", "http-server", "dist", "-p", "4321"]

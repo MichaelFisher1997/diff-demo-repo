@@ -10,3 +10,13 @@ services:
       - SE_NODE_OVERRIDE_MAX_SESSIONS=true
       - SE_NODE_MAX_SESSIONS=5
     shm_size: 2g
+
+  web:
+    build: .
+    container_name: diff-demo-web
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - chrome
