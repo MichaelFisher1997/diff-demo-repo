@@ -23,7 +23,7 @@ async function takeScreenshots() {
   // Use environment variables for flexible configuration
   const seleniumHost = process.env.SELENIUM_HOST || 'localhost';
   const seleniumPort = process.env.SELENIUM_PORT || '4444';
-  const baseUrl = process.env.BASE_URL || 'http://localhost:4321';
+  const baseUrl = process.env.BASE_URL || 'http://localhost:4323';
 
   console.log(`Using Selenium at: ${seleniumHost}:${seleniumPort}`);
   console.log(`Using base URL: ${baseUrl}`);

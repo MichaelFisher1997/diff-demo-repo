@@ -22,9 +22,9 @@ export default function Layout({ title, children }) {
         {children}
       </main>
 
-      <footer class="bg-gray-100 mt-20">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-          <p class="text-center text-gray-600">© 2024 Minimal Site. Built with Astro and Tailwind CSS.</p>
+      <footer className="bg-gray-100 mt-20">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-gray-600">© 2024 Modern Site. Built with Astro and Tailwind CSS.</p>
         </div>
       </footer>
     </>
